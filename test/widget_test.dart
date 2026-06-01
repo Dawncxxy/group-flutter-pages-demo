@@ -7,7 +7,7 @@ void main() {
     await tester.pumpWidget(const GroupFlutterPagesApp());
 
     expect(find.text('小组项目展示'), findsOneWidget);
-    expect(find.text('星火小组 Flutter Web 展示页'), findsOneWidget);
+    expect(find.text(TeamHomePage.projectTitle), findsOneWidget);
     expect(find.text('小组成员与分工'), findsOneWidget);
 
     await tester.drag(find.byType(ListView), const Offset(0, -500));
