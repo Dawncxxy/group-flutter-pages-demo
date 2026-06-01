@@ -84,12 +84,28 @@
 
 ## 截图说明
 
-| 截图 | 说明 |
-| --- | --- |
-| 截图1 | `flutter test` 终端输出，显示 7 个测试全部通过 |
-| 截图2 | GitHub Pages 页面（https://RouX-O.github.io/group-flutter-pages-demo/） |
+| 序号 | 截图内容 | 文件路径 | 说明 |
+|------|---------|---------|------|
+| 1 | `flutter test` 终端输出 | `docs/screenshots/flutter-test-pass.png` | 显示 7/7 测试用例全部通过，"All tests passed!" |
+| 2 | GitHub Pages 页面（上部） | `docs/screenshots/github-pages-view-top.png` | 浏览器访问 https://roux-o.github.io/group-flutter-pages-demo/，展示标题、口号、小组成员与分工 |
+| 3 | GitHub Pages 页面（下部） | `docs/screenshots/github-pages-view-bottom.png` | 展示项目功能列表、发布说明 |
 
-> 截图由测试执行人（组员F）提供，保存在作业提交材料中。
+### 截图内容描述
+
+**图 1：flutter test 终端输出**
+- 运行命令：`flutter test`
+- 结果：7/7 测试用例全部通过
+- 关键信息：`All tests passed!`
+
+**图 2：GitHub Pages 页面 - 上部**
+- 页面标题：小组项目展示
+- 项目标题：星火小组 Flutter Web 展示页
+- 项目口号：用 GitHub 协作完成一次真实的小组项目发布
+- 成员列表（5 人）：组长（李组长）、组员 A（成员 A）、组员 B（成员 B）、组员 C（成员 C）、组员 D（成员 D）
+
+**图 3：GitHub Pages 页面 - 下部**
+- 项目功能列表（4 条）：Flutter Web 单页应用、GitHub Pull Request 协作、组长审核与合并代码、GitHub Pages 静态站点发布
+- 发布说明（3 条）：源码保存在 main 分支、Flutter Web 编译产物发布到 gh-pages 分支、组长合并 PR 后统一执行部署命令
 
 ## 验收结论
 
