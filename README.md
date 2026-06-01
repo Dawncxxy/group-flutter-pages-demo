@@ -1,52 +1,204 @@
-# 小组 Flutter Web 展示页示例项目
+# 小组 Flutter Web 展示页
 
-这是配套“GitHub 协作与 Flutter Web 部署”案例的初始项目。组长可以把这个项目提交到 GitHub 仓库的 `main` 分支，6 名组员分别基于自己的任务分支提交 Pull Request。
+7 人小组基于 Flutter 框架开发的团队展示页面，使用 GitHub Fork + Pull Request 模式协作，通过 GitHub Pages 发布。
 
-## 本地运行
+## 目录
+
+- [背景](#背景)
+- [安装](#安装)
+- [用法](#用法)
+- [项目结构](#项目结构)
+- [小组成员与分工](#小组成员与分工)
+- [技术栈](#技术栈)
+- [在线访问地址](#在线访问地址)
+- [分支结构](#分支结构)
+- [维护者](#维护者)
+- [致谢](#致谢)
+- [如何贡献](#如何贡献)
+- [许可证](#许可证)
+
+## 背景
+
+本项目是 GitHub 协作与 Flutter Web 部署的教学案例。小组成员各自负责修改页面中的不同内容区块，在独立分支上提交代码，通过 Pull Request 由组长审核后合并到主分支，最终构建为 Web 静态文件并部署到 GitHub Pages。
+
+页面包含 **4 个模块**：
+
+| 模块 | 内容 | 负责成员 |
+|------|------|----------|
+| 首页标题区（Hero） | 项目标题 `projectTitle` 与口号 `projectSlogan` | 组员 A 王小梅 |
+| 成员介绍 | 7 位成员的姓名、角色、任务分工卡片列表 | 组员 B 唐一甜 |
+| 项目功能 | 项目功能说明的列表 | 组员 C 刘昱泽 |
+| 发布说明 | 部署方式与访问地址 | 组员 D 张蕴洁 |
+
+## 安装
+
+### 前置条件
+
+- [Flutter SDK](https://flutter.dev)（`>=3.11.0`，需启用 Web 支持）
+- [Git](https://git-scm.com)
+- Chrome 浏览器
+
+### 步骤
 
 ```bash
+# 1. 克隆仓库
+git clone https://github.com/RouX-O/group-flutter-pages-demo.git
+cd group-flutter-pages-demo
+
+# 2. 下载依赖
 flutter pub get
-flutter run
-```
 
-如果要用浏览器运行，可以选择 Chrome 或 web-server：
-
-```bash
+# 3. 在浏览器中运行
 flutter run -d chrome
 ```
 
-## 构建 Web 静态文件
-
-把 `REPO_NAME` 替换成你的 GitHub 仓库名：
+运行测试，验证项目完整性：
 
 ```bash
-flutter build web --base-href /REPO_NAME/
+flutter test
 ```
 
-构建完成后，静态网站文件位于：
+测试全部通过时显示 `All tests passed!`。
 
-```text
-build/web/
+## 用法
+
+### 浏览器访问
+
+项目启动后在 Chrome 中打开，页面展示 4 个内容模块（首页标题 → 成员介绍 → 项目功能 → 发布说明），可滚动浏览全部内容。
+
+### 修改页面内容
+
+所有内容修改集中在 `lib/main.dart` 文件中，各组员修改对应的静态常量即可：
+
+```dart
+// 组员 A 王小梅 → 首页标题与口号
+static const String projectTitle = '...';
+static const String projectSlogan = '...';
+
+// 组员 B 唐一甜 → 小组成员与分工
+static const List<TeamMember> members = [ ... ];
+
+// 组员 C 刘昱泽 → 项目功能列表
+static const List<String> features = [ ... ];
+
+// 组员 D 张蕴洁 → 发布说明
+static const List<String> releaseNotes = [ ... ];
 ```
 
-这些文件可以发布到仓库的 `gh-pages` 分支。
+修改后重新运行 `flutter run -d chrome` 即可预览效果。
 
-## 小组分工
+### 构建 Web 静态文件
 
-本小组共 7 人，包含 1 名组长和 6 名组员。
+```bash
+flutter build web --base-href /group-flutter-pages-demo/
+```
 
-| 成员 | 负责内容 | 分支名 |
-| --- | --- | --- |
-| 组长 | 创建仓库、上传初始项目、审核所有 PR、构建 Flutter Web、发布 GitHub Pages | `main` |
-| 组员 A | 修改 `projectTitle` 和 `projectSlogan`（首页标题与口号） | `member-a-title` |
-| 组员 B | 修改 `members` 列表（真实姓名、角色、任务描述） | `member-b-members` |
-| 组员 C | 修改 `features` 列表（项目功能描述） | `member-c-features` |
-| 组员 D | 修改 `releaseNotes`（发布说明和访问地址） | `member-d-release` |
-| 组员 E | 编写/完善 `README.md`（小组简介、使用说明、访问地址等） | `member-e-readme` |
-| 组员 F | 本地运行 `flutter test` 全量验收，合并后协助组长执行部署命令并截图记录 | `member-f-test` |
+构建产物位于 `build/web/` 目录。
 
-## 组员任务入口
+> **注意：** `--base-href` 的值必须与 GitHub 仓库名完全一致，且前后都要有 `/`。
 
-组员 A-D 主要修改 `lib/main.dart` 中的不同位置，组员 E 修改 `README.md`，组员 F 负责测试验收记录。
+## 项目结构
 
-每名组员都应该在自己的分支上修改，提交 commit，然后向组长发起 Pull Request。
+```
+group-flutter-pages-demo/
+├── lib/
+│   └── main.dart              # 主入口，所有内容在此修改
+├── test/
+│   └── widget_test.dart        # 基础冒烟测试
+├── web/
+│   ├── favicon.png             # 网站图标
+│   ├── index.html              # Web 入口 HTML
+│   └── icons/                  # PWA 图标资源
+├── android/                    # Android 平台配置
+├── pubspec.yaml                # 项目配置与依赖声明
+├── pubspec.lock                # 依赖版本锁定
+├── analysis_options.yaml       # Dart 静态分析规则
+├── LICENSE                     # MIT 许可证
+└── README.md                   # 项目说明文档
+```
+
+## 小组成员与分工
+
+| 角色 | 姓名 | 负责内容 | 分支名 |
+|------|------|----------|--------|
+| 组长 | 蒋亿乐 | 创建仓库、维护 main 分支、审核 PR、发布 GitHub Pages | `main` |
+| 组员 A | 王小梅 | 修改首页标题和项目口号 | `member-a-title` |
+| 组员 B | 唐一甜 | 整理小组成员介绍与任务分工 | `member-b-members` |
+| 组员 C | 刘昱泽 | 整理项目功能列表 | `member-c-features` |
+| 组员 D | 张蕴洁 | 记录发布说明和访问地址 | `member-d-release` |
+| 组员 E | 杨晨曦 | 编写 README 项目说明 | `member-e-readme` |
+| 组员 F | 于昕冉 | 本地测试验收与协助部署 | `member-f-test` |
+
+## 技术栈
+
+| 技术 | 说明 |
+|------|------|
+| **Flutter** | 跨平台 UI 框架，本项目使用 Web 构建 |
+| **Dart** | Flutter 编程语言 |
+| **Material Design 3** | 内置 UI 设计语言 |
+| **GitHub** | 代码托管与 Pull Request 审核 |
+| **GitHub Pages** | 静态网页托管，通过 `gh-pages` 分支发布 |
+
+### 项目依赖
+
+| 依赖 | 版本 | 用途 |
+|------|------|------|
+| `flutter` | SDK | 核心框架 |
+| `cupertino_icons` | `^1.0.8` | iOS 风格图标 |
+| `flutter_test` | SDK | 单元测试 |
+| `flutter_lints` | `^6.0.0` | 代码规范检查 |
+
+## 在线访问地址
+
+```
+https://roux-o.github.io/group-flutter-pages-demo/
+```
+
+> 由组长在所有 PR 合并、完成构建后更新。
+
+如果页面显示空白，请稍等 1–3 分钟后刷新，或检查 `--base-href` 是否与仓库名一致。
+
+## 分支结构
+
+| 分支 | 内容 | 说明 |
+|------|------|------|
+| `main` | Flutter 源代码 | 所有协作开发基于此分支，组员修改通过 PR 合并 |
+| `gh-pages` | `flutter build web` 生成的静态网页文件 | GitHub Pages 读取此分支对外发布网页 |
+
+## 维护者
+
+- **蒋亿乐**（组长）— 仓库管理员，负责审核 Pull Request 与发布部署
+
+## 致谢
+
+本项目基于 [standard-readme](https://github.com/RichardLitt/standard-readme) 规范编写 README，采用 MIT 开源许可证发布。
+
+## 如何贡献
+
+本项目采用 **Fork → 创建分支 → 修改 → Pull Request → 审核 → 合并** 的协作流程：
+
+```
+组员 Fork 仓库
+   ↓
+本地 git clone 自己的 fork
+   ↓
+git checkout -b member-x-xxx   # 创建自己的分支
+   ↓
+修改指定内容
+   ↓
+flutter test                   # 本地验证
+   ↓
+git add / commit / push
+   ↓
+在 GitHub 发起 Pull Request（目标：RouX-O/group-flutter-pages-demo main）
+   ↓
+组长审核 → 合并 / 要求修改
+   ↓
+组长构建并发布到 gh-pages
+```
+
+欢迎通过 [GitHub Issues](https://github.com/RouX-O/group-flutter-pages-demo/issues) 提交问题或建议。
+
+## 许可证
+
+[MIT](LICENSE) © 2026 星火小组
