@@ -38,10 +38,10 @@ class TeamHomePage extends StatelessWidget {
   ];
 
   static const List<String> features = [
-    'Flutter Web 单页应用',
-    'GitHub Pull Request 协作',
-    '组长审核与合并代码',
-    'GitHub Pages 静态站点发布',
+    '展示小组项目主题与小组口号',
+    '展示七位成员的姓名、角色与任务分工',
+    '每位组员通过独立分支和 Pull Request 完成协作修改',
+    '使用 Flutter Web 构建并通过 GitHub Pages 对外发布',
   ];
 
   static const List<String> releaseNotes = [
